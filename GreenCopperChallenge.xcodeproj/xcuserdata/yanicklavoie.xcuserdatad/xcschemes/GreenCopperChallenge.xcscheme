@@ -39,6 +39,16 @@
                ReferencedContainer = "container:GreenCopperChallenge.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "284E61322044B80700941A78"
+               BuildableName = "GreenCopperChallengeUITests.xctest"
+               BlueprintName = "GreenCopperChallengeUITests"
+               ReferencedContainer = "container:GreenCopperChallenge.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

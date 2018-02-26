@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // The app delegate must implement the window property
     // from UIApplicationDelegate protocol
     var window: UIWindow?
+    var isUserInAuthFlow: Bool = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -36,13 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // function to support URLSchemes.  Used if other apps wants to open our app.  In our case, when coming back from Auth.
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if SPTAuth.defaultInstance().canHandle(url) {
-            
+            isUserInAuthFlow = true
             SPTAuth.defaultInstance().handleAuthCallback(withTriggeredAuthURL: url, callback: { (error, session) in
+                
                 if error != nil {
                     print("Authorization Error: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 
+                self.isUserInAuthFlow = false
                 SPTAuth.defaultInstance().session = session
                 // Store our session away for future usage
                 let sessionData = NSKeyedArchiver.archivedData(withRootObject: SPTAuth.defaultInstance().session)

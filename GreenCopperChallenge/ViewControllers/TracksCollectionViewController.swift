@@ -42,35 +42,20 @@ class TracksCollectionViewController: UIViewController {
 
         return barButtonItem
     }()
-    
-    convenience init() {
-        self.init(nibName:nil, bundle:nil)
-    }
-    
-    convenience init(with bandParam: Band) {
-        self.init(nibName: nil, bundle: nil)
-        band = bandParam
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Top Traxx".uppercased()
         
         navigationItem.setLeftBarButton(logoutBarButtonItem, animated: false)
-        
-        if let band = band {
-            retrieveSpotifyData(for: band)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(spotifyTopTracksReceived), name: NSNotification.Name(rawValue: kSpotifyTopTracksReceived), object: nil)
     }
+
+    deinit {
+        // Remove Notification listener
+        NotificationCenter.default.removeObserver(self)
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -99,52 +84,17 @@ class TracksCollectionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // Connect to the Spotify API and get Top Tracks data for what ever Band is passed for parameter
-    func retrieveSpotifyData(for band: Band) {
-        let auth:SPTAuth = SPTAuth.defaultInstance()
-        let artistURL = band.spotifyURL
-        
-        let topTracksRequest:URLRequest
-        do {
-            let accessToken = auth.session.accessToken
-            topTracksRequest = try SPTArtist.createRequestForTopTracks(forArtist: artistURL, withAccessToken: accessToken, market:
-                "CA")
-            SPTRequest.sharedHandler().perform(topTracksRequest, callback: { (error, response, data) in
-                //parse top tracks.
-                guard error == nil else {
-                    return
+    @objc func spotifyTopTracksReceived(notif: Notification) {
+        if let topTracks = notif.object as? Array<Any> {
+            do {
+                for track in topTracks {
+                    let topTrack = try SPTTrack(decodedJSONObject: track)
+                    self.trackItems.append(topTrack)
                 }
-                // make sure we got data in the response
-                guard let responseData = data else {
-                    print("Error: did not receive data")
-                    return
-                }
-                
-                do {
-                    if let tracksJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String:Any] {
-                        if let topTracks: Array<Any> = tracksJSON["tracks"] as? Array<Any> {
-                            for track in topTracks {
-                                let topTrack = try SPTTrack(decodedJSONObject: track)
-                                self.trackItems.append(topTrack)
-                            }
-                        } else {
-                            return
-                        }
-                    } else {
-                        print("error!!!")
-                        return
-                    }
-                } catch {
-                    return
-                }
-            
-                self.collectionView.reloadData()
-            })
-
-        } catch _ {
+            } catch {}
+            self.collectionView.reloadData()
         }
     }
-    
 }
 
 // MARK: CollectionView extensions

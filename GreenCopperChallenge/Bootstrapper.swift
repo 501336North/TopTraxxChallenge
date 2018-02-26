@@ -22,7 +22,9 @@ struct Bootstrapper {
         container.register(SpotifyAuthProtocol.self) { r in
             AuthService()
             } .inObjectScope(.container)
-        
+        container.register(SpotifyNetworkingProtocol.self) { r in
+            NetworkService()
+            } .inObjectScope(.container)
     }
     
     static func getContainer() -> Container {

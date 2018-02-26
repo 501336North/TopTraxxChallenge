@@ -321,13 +321,18 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // Present Top Tracks for our Band in a CollectionViewe
+    // Present Top Tracks for our Band in a CollectionView
     func showTrackList() {
-        let nextViewController: TracksCollectionViewController = TracksCollectionViewController(with: selectedBand)
-        let navController: UINavigationController = UINavigationController(rootViewController: nextViewController)
-        navController.modalTransitionStyle = .flipHorizontal
+        if let networkService = ServiceFactory.resolve(serviceType: SpotifyNetworkingProtocol.self) {
+            networkService.retrieveTopTracks(for: selectedBand, closure: {
+                let nextViewController: TracksCollectionViewController = TracksCollectionViewController()
+                let navController: UINavigationController = UINavigationController(rootViewController: nextViewController)
+                navController.modalTransitionStyle = .flipHorizontal
+                
+                self.present(navController, animated: true, completion: nil)
+            })
+        }
         
-        present(navController, animated: true, completion: nil)
     }
     
     // Present Authentication flow

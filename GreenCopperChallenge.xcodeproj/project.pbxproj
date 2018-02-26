@@ -14,6 +14,8 @@
 		2824C490203BAF10000B343E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2824C48F203BAF10000B343E /* Extensions.swift */; };
 		2824C492203BBCB0000B343E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2824C491203BBCB0000B343E /* AudioToolbox.framework */; };
 		284E61272042912400941A78 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E61262042912400941A78 /* AuthService.swift */; };
+		284E612E2044ADD400941A78 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E612D2044ADD400941A78 /* NetworkService.swift */; };
+		284E61362044B80800941A78 /* GreenCopperChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E61352044B80800941A78 /* GreenCopperChallengeUITests.swift */; };
 		28610B75203D1B4100554142 /* TracksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28610B74203D1B4100554142 /* TracksCollectionViewCell.swift */; };
 		28610B77203DCEC000554142 /* TracksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28610B76203DCEC000554142 /* TracksCollectionViewController.swift */; };
 		28610B79203DEFE000554142 /* TrackPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28610B78203DEFE000554142 /* TrackPlayerViewController.swift */; };
@@ -28,6 +30,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		2824C481203B852E000B343E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2824C464203B852E000B343E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2824C46B203B852E000B343E;
+			remoteInfo = GreenCopperChallenge;
+		};
+		284E61382044B80800941A78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2824C464203B852E000B343E /* Project object */;
 			proxyType = 1;
@@ -50,6 +59,10 @@
 		2824C493203BBCB0000B343E /* GreenCopperChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenCopperChallenge.entitlements; sourceTree = "<group>"; };
 		284E61262042912400941A78 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		284E61292044748B00941A78 /* Spotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Spotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		284E612D2044ADD400941A78 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		284E61332044B80700941A78 /* GreenCopperChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenCopperChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		284E61352044B80800941A78 /* GreenCopperChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenCopperChallengeUITests.swift; sourceTree = "<group>"; };
+		284E61372044B80800941A78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28610B74203D1B4100554142 /* TracksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksCollectionViewCell.swift; sourceTree = "<group>"; };
 		28610B76203DCEC000554142 /* TracksCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksCollectionViewController.swift; sourceTree = "<group>"; };
 		28610B78203DEFE000554142 /* TrackPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlayerViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +94,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		284E61302044B80700941A78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -89,6 +109,7 @@
 			children = (
 				2824C46E203B852E000B343E /* GreenCopperChallenge */,
 				2824C483203B852E000B343E /* GreenCopperChallengeTests */,
+				284E61342044B80800941A78 /* GreenCopperChallengeUITests */,
 				2824C46D203B852E000B343E /* Products */,
 				7FFDFD86F0F052AE9ABB280D /* Pods */,
 				A74BDA9F8A89C40BED5A7E56 /* Frameworks */,
@@ -100,6 +121,7 @@
 			children = (
 				2824C46C203B852E000B343E /* GreenCopperChallenge.app */,
 				2824C480203B852E000B343E /* GreenCopperChallengeTests.xctest */,
+				284E61332044B80700941A78 /* GreenCopperChallengeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +151,15 @@
 				2824C486203B852F000B343E /* Info.plist */,
 			);
 			path = GreenCopperChallengeTests;
+			sourceTree = "<group>";
+		};
+		284E61342044B80800941A78 /* GreenCopperChallengeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				284E61352044B80800941A78 /* GreenCopperChallengeUITests.swift */,
+				284E61372044B80800941A78 /* Info.plist */,
+			);
+			path = GreenCopperChallengeUITests;
 			sourceTree = "<group>";
 		};
 		28610B7A203F8F5E00554142 /* ViewControllers */ = {
@@ -172,6 +203,7 @@
 			children = (
 				28AF239A2041F72C001A88A5 /* AppStartupService.swift */,
 				284E61262042912400941A78 /* AuthService.swift */,
+				284E612D2044ADD400941A78 /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,6 +278,24 @@
 			productReference = 2824C480203B852E000B343E /* GreenCopperChallengeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		284E61322044B80700941A78 /* GreenCopperChallengeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 284E613A2044B80800941A78 /* Build configuration list for PBXNativeTarget "GreenCopperChallengeUITests" */;
+			buildPhases = (
+				284E612F2044B80700941A78 /* Sources */,
+				284E61302044B80700941A78 /* Frameworks */,
+				284E61312044B80700941A78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				284E61392044B80800941A78 /* PBXTargetDependency */,
+			);
+			name = GreenCopperChallengeUITests;
+			productName = GreenCopperChallengeUITests;
+			productReference = 284E61332044B80700941A78 /* GreenCopperChallengeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -270,6 +320,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2824C46B203B852E000B343E;
 					};
+					284E61322044B80700941A78 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2824C46B203B852E000B343E;
+					};
 				};
 			};
 			buildConfigurationList = 2824C467203B852E000B343E /* Build configuration list for PBXProject "GreenCopperChallenge" */;
@@ -287,6 +342,7 @@
 			targets = (
 				2824C46B203B852E000B343E /* GreenCopperChallenge */,
 				2824C47F203B852E000B343E /* GreenCopperChallengeTests */,
+				284E61322044B80700941A78 /* GreenCopperChallengeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,6 +357,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2824C47E203B852E000B343E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		284E61312044B80700941A78 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -412,6 +475,7 @@
 				28AF239B2041F72C001A88A5 /* AppStartupService.swift in Sources */,
 				28610B77203DCEC000554142 /* TracksCollectionViewController.swift in Sources */,
 				2824C472203B852E000B343E /* LoginViewController.swift in Sources */,
+				284E612E2044ADD400941A78 /* NetworkService.swift in Sources */,
 				284E61272042912400941A78 /* AuthService.swift in Sources */,
 				28AF239E2041FE34001A88A5 /* Band.swift in Sources */,
 				28610B7D203F9B7500554142 /* TopTraxxSlider.swift in Sources */,
@@ -430,6 +494,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		284E612F2044B80700941A78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				284E61362044B80800941A78 /* GreenCopperChallengeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -437,6 +509,11 @@
 			isa = PBXTargetDependency;
 			target = 2824C46B203B852E000B343E /* GreenCopperChallenge */;
 			targetProxy = 2824C481203B852E000B343E /* PBXContainerItemProxy */;
+		};
+		284E61392044B80800941A78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2824C46B203B852E000B343E /* GreenCopperChallenge */;
+			targetProxy = 284E61382044B80800941A78 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -622,6 +699,36 @@
 			};
 			name = Release;
 		};
+		284E613B2044B80800941A78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GUCKHMW3L6;
+				INFOPLIST_FILE = GreenCopperChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.radappz.GreenCopperChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GreenCopperChallenge;
+			};
+			name = Debug;
+		};
+		284E613C2044B80800941A78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GUCKHMW3L6;
+				INFOPLIST_FILE = GreenCopperChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.radappz.GreenCopperChallengeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GreenCopperChallenge;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -648,6 +755,15 @@
 			buildConfigurations = (
 				2824C48D203B852F000B343E /* Debug */,
 				2824C48E203B852F000B343E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		284E613A2044B80800941A78 /* Build configuration list for PBXNativeTarget "GreenCopperChallengeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				284E613B2044B80800941A78 /* Debug */,
+				284E613C2044B80800941A78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
