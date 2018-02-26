@@ -76,6 +76,80 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        bandLogoImageView.snp.remakeConstraints { (make) in
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.width.equalTo(1600/8)
+                make.height.equalTo(2133/8)
+                
+                make.centerY.equalToSuperview()
+                make.left.equalToSuperview().offset(40)
+
+            } else {
+                make.width.equalTo(1600/8)
+                make.height.equalTo(2133/8)
+                
+                make.centerX.equalToSuperview()
+                make.top.equalTo(60)
+
+            }
+        }
+        
+        if (SPTAuth.spotifyApplicationIsInstalled() == false) {
+            hintButton.snp.remakeConstraints { (make) in
+                if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                    make.centerX.equalToSuperview().offset(140)
+                    make.height.equalTo(60)
+                    make.width.equalTo(240)
+                    make.centerY.equalToSuperview().offset(-20)
+                } else {
+                    make.centerX.equalToSuperview()
+                    make.height.equalTo(60)
+                    make.width.equalTo(240)
+                    make.centerY.equalToSuperview().offset(80)
+                }
+            }
+        }
+        
+        requirementsLabel.snp.remakeConstraints { (make) in
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.width.equalTo(240)
+                make.height.equalTo(24)
+                make.centerX.equalToSuperview().offset(140)
+                make.top.equalToSuperview().offset(80)
+
+            } else {
+                make.centerX.width.equalToSuperview()
+                make.height.equalTo(24)
+                make.centerY.equalToSuperview().offset(40)
+
+            }
+        }
+        
+        loginButton.snp.remakeConstraints { (make) in
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview().offset(140)
+                make.bottom.equalToSuperview().offset(-60)
+
+            } else {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-60)
+
+            }
+        }
+
+        
+        
+        
+    }
+    
     // Configure UI Elements and layout programmatically
     private func configureSubviews() {
         view.backgroundColor = .black
@@ -84,34 +158,64 @@ class LoginViewController: UIViewController {
         view.addSubview(bandLogoImageView)
         
         requirementsLabel.snp.makeConstraints { (make) in
-            make.centerX.width.equalToSuperview()
-            make.height.equalTo(24)
-            make.centerY.equalToSuperview().offset(40)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.centerX.width.equalToSuperview()
+                make.height.equalTo(24)
+                make.centerY.equalToSuperview().offset(40)
+            } else {
+                make.width.equalTo(240)
+                make.height.equalTo(24)
+                make.centerX.equalToSuperview().offset(140)
+                make.top.equalToSuperview().offset(80)
+            }
         }
         
         loginButton.snp.makeConstraints { (make) in
-            make.height.equalTo(60)
-            make.width.equalTo(240)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-60)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-60)
+            } else {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview().offset(140)
+                make.bottom.equalToSuperview().offset(-60)
+            }
         }
         
         bandLogoImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(1600/8)
-            make.height.equalTo(2133/8)
-            
-            make.centerX.equalToSuperview()
-            make.top.equalTo(60)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.width.equalTo(1600/8)
+                make.height.equalTo(2133/8)
+                
+                make.centerX.equalToSuperview()
+                make.top.equalTo(60)
+            } else {
+                make.width.equalTo(1600/8)
+                make.height.equalTo(2133/8)
+                
+                make.centerY.equalToSuperview()
+                make.left.equalToSuperview().offset(40)
+            }
         }
         
         if (SPTAuth.spotifyApplicationIsInstalled() == false) {
             view.addSubview(hintButton)
             
             hintButton.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.height.equalTo(60)
-                make.width.equalTo(240)
-                make.centerY.equalToSuperview().offset(80)
+                if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                    make.centerX.equalToSuperview()
+                    make.height.equalTo(60)
+                    make.width.equalTo(240)
+                    make.centerY.equalToSuperview().offset(80)
+                } else {
+                    make.centerX.equalToSuperview().offset(140)
+                    make.height.equalTo(60)
+                    make.width.equalTo(240)
+                    make.centerY.equalToSuperview().offset(-20)
+                }
+
             }
         }
         

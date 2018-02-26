@@ -77,13 +77,7 @@ class TrackPlayerViewController: UIViewController {
     
     // UIImageView used on view background.  We are using album artwork to which some filters are applied.
     private lazy var blurredAlbumArtworkBackgroundImageView: UIImageView = {
-        let overlayView = UIView()
-        overlayView.backgroundColor = UIColor.topTraxxBlack.withAlphaComponent(0.25)
-        overlayView.frame = UIScreen.main.bounds
-
         let imageView = UIImageView()
-        imageView.addSubview(overlayView)
-        
         return imageView
     }()
     
@@ -97,7 +91,7 @@ class TrackPlayerViewController: UIViewController {
         // computing filter on album artwork to use it on background view
         let blurRadius: CGFloat = 30.0
         let saturationDeltaFactor: CGFloat = 0.8
-        let tintColor = UIColor.init(white: 0.75, alpha: 0.5)
+        let tintColor = UIColor.topTraxxBlack.withAlphaComponent(0.25)
         let blurredImage = UIImage.ty_imageByApplyingBlur(to: artworkImage!, withRadius: blurRadius, tintColor: tintColor, saturationDeltaFactor: saturationDeltaFactor, maskImage: nil)
         blurredAlbumArtworkBackgroundImageView.image = blurredImage
         
@@ -122,6 +116,7 @@ class TrackPlayerViewController: UIViewController {
         guard let navController = navigationController else { return }
         navController.navigationBar.tintColor = dominantColor
         navController.navigationBar.barTintColor = dominantColor
+        
         navController.interactivePopGestureRecognizer?.isEnabled = false
 
     }
@@ -153,6 +148,63 @@ class TrackPlayerViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        progressSlider.snp.remakeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.height.equalTo(14)
+            make.centerX.equalToSuperview()
+            
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.top.equalTo(27)
+            } else {
+                make.top.equalTo(57)
+            }
+        }
+        
+        albumArtworkImageView.snp.remakeConstraints { (make) in
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                let margin: CGFloat = 50
+                make.width.height.equalTo( min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) - (margin * 2))
+                make.left.equalTo(margin)
+                make.centerY.equalToSuperview().offset(15)
+
+            } else {
+                let margin: CGFloat = 40
+                make.width.height.equalTo( min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) - (margin * 2))
+                make.centerX.equalToSuperview()
+                make.top.equalTo(60 + margin)
+
+            }
+        }
+        
+        playerButton.snp.remakeConstraints { (make) in
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.right.equalToSuperview().offset(-50)
+                make.centerY.equalToSuperview().offset(15)
+
+            } else {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-40)
+            }
+        }
+        
+        if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+            trackTitleLabel.isHidden = true
+            title = trackToPlay?.name
+        } else {
+            trackTitleLabel.isHidden = false
+            title = ""
+        }
+
+    }
+    
     // Configure UI Elements and layout programmatically
     private func configureSubviews() {
         view.addSubview(blurredAlbumArtworkBackgroundImageView)
@@ -166,10 +218,18 @@ class TrackPlayerViewController: UIViewController {
         }
         
         albumArtworkImageView.snp.makeConstraints { (make) in
-            let margin: CGFloat = 40
-            make.width.height.equalTo(UIScreen.main.bounds.size.width - (margin * 2))
-            make.centerX.equalToSuperview()
-            make.top.equalTo(60 + margin)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                let margin: CGFloat = 40
+                make.width.height.equalTo( min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) - (margin * 2))
+                make.centerX.equalToSuperview()
+                make.top.equalTo(60 + margin)
+
+            } else {
+                let margin: CGFloat = 50
+                make.width.height.equalTo( min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) - (margin * 2))
+                make.left.equalTo(margin)
+                make.centerY.equalToSuperview().offset(15)
+            }
         }
         
         trackTitleLabel.snp.makeConstraints { (make) in
@@ -178,17 +238,29 @@ class TrackPlayerViewController: UIViewController {
         }
         
         playerButton.snp.makeConstraints { (make) in
-            make.height.equalTo(60)
-            make.width.equalTo(240)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-40)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-40)
+
+            } else {
+                make.height.equalTo(60)
+                make.width.equalTo(240)
+                make.right.equalToSuperview().offset(-50)
+                make.centerY.equalToSuperview().offset(15)
+            }
         }
         
         progressSlider.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.height.equalTo(14)
             make.centerX.equalToSuperview()
-            make.top.equalTo(57)
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait || UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portraitUpsideDown {
+                make.top.equalTo(57)
+            } else {
+                make.top.equalTo(27)
+            }
         }
         
         progressSlider.maximumTrackTintColor = dominantColor
@@ -204,7 +276,7 @@ class TrackPlayerViewController: UIViewController {
         playerButton.setTitleColor(readableColor, for: .normal)
         trackTitleLabel.textColor = readableColor
         navigationController?.navigationBar.tintColor = readableColor
-
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.topTraxxFontRegular17, NSAttributedStringKey.foregroundColor: readableColor as Any]
     }
 
     // compute if we should light or dark color for text color depending on color passed as parameter (this param will be the dominant color we got from album artwork)

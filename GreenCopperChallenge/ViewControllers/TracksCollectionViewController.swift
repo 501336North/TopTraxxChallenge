@@ -25,7 +25,6 @@ class TracksCollectionViewController: UIViewController {
         layout.itemSize = CGSize(width: screenWidth, height: screenWidth)
 
         let tracksCollectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        
         tracksCollectionView.register(TracksCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         tracksCollectionView.dataSource = self
         tracksCollectionView.delegate = self
@@ -65,7 +64,7 @@ class TracksCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Top Traxx".uppercased()
-        view.addSubview(collectionView)
+        
         navigationItem.setLeftBarButton(logoutBarButtonItem, animated: false)
         
         if let band = band {
@@ -75,6 +74,7 @@ class TracksCollectionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        configureSubviews()
         
         guard let navController = navigationController else { return }
         navController.navigationBar.tintColor = UIColor.topTraxxAccentDark
@@ -82,6 +82,15 @@ class TracksCollectionViewController: UIViewController {
         navController.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.topTraxxFontRegular17, NSAttributedStringKey.foregroundColor: UIColor.topTraxxAccentDark as Any]
         
         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    // Configure UI Elements and layout programmatically
+    private func configureSubviews() {
+        view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { (make) in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     // function to Logout of the App and kill Spotift session - returns the user to the login screen
