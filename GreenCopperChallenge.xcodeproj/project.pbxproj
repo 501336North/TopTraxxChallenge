@@ -49,6 +49,7 @@
 		2824C491203BBCB0000B343E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2824C493203BBCB0000B343E /* GreenCopperChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenCopperChallenge.entitlements; sourceTree = "<group>"; };
 		284E61262042912400941A78 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		284E61292044748B00941A78 /* Spotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Spotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28610B74203D1B4100554142 /* TracksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksCollectionViewCell.swift; sourceTree = "<group>"; };
 		28610B76203DCEC000554142 /* TracksCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksCollectionViewController.swift; sourceTree = "<group>"; };
 		28610B78203DEFE000554142 /* TrackPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPlayerViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		A74BDA9F8A89C40BED5A7E56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				284E61292044748B00941A78 /* Spotify.framework */,
 				2824C491203BBCB0000B343E /* AudioToolbox.framework */,
 				B63AE6D0CC255CB0138FC9A8 /* Pods_GreenCopperChallenge.framework */,
 			);
