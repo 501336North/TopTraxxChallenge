@@ -8,6 +8,7 @@
 
 import UIKit
 import Spotify
+import SnapKit
 
 class LoginViewController: UIViewController {
     var auth: SPTAuth = SPTAuth.defaultInstance()
@@ -51,6 +52,7 @@ class LoginViewController: UIViewController {
         return label
     }()
 
+    // Hint button is used to show an alertView to users that don't have a Spotify account.
     private lazy var hintButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom)
         button.addTarget(self, action: #selector(hintButtonTouched), for: .touchUpInside)
@@ -74,6 +76,7 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    // Configure UI Elements and layout programmatically
     private func configureSubviews() {
         view.backgroundColor = .black
         view.addSubview(requirementsLabel)
@@ -116,12 +119,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // We are using hardcoded Artists, fill that out.
         fillBandsMockData()
+        // Listen to notifications, used to show Tracks Collection View once we have a valid session from Spotify
         NotificationCenter.default.addObserver(self, selector: #selector(sessionUpdatedNotification), name: NSNotification.Name(rawValue: kSessionWasUpdated), object: nil)
     }
     
     deinit {
+        // Remove Notification listener
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -131,6 +136,7 @@ class LoginViewController: UIViewController {
         configureSubviews()
     }
     
+    // We are using hardcoded Artists, fill that out.
     func fillBandsMockData() {
         let band1: Band = Band()
         band1.name = "Radiohead".uppercased()
@@ -155,7 +161,6 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: auth related methods
-    
     @objc func sessionUpdatedNotification(notification: NSNotification) {
         guard let session = auth.session else { return }
         
@@ -168,6 +173,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Show short lived account info so users can log in and test the app.
     @objc func hintButtonTouched() {
         let alertController = UIAlertController(title: "We've got you covered", message: "Try\n501336north\n&\n713809\n\nP.S. Just remember the password.  We've copied the username to the pasteboard for you.", preferredStyle: .alert)
         
@@ -180,6 +186,7 @@ class LoginViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    // Auth to a Spotify Premium account
     @objc func loginButtonTouched() {
         guard let session = auth.session else { openLoginPage(); return }
         
@@ -191,6 +198,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Present Top Tracks for our Band in a CollectionViewe
     func showTrackList() {
         let nextViewController: TracksCollectionViewController = TracksCollectionViewController(with: selectedBand)
         let navController: UINavigationController = UINavigationController(rootViewController: nextViewController)
@@ -199,11 +207,14 @@ class LoginViewController: UIViewController {
         present(navController, animated: true, completion: nil)
     }
     
+    // Present Authentication flow
     func openLoginPage() {
         isWebAuth = !SPTAuth.spotifyApplicationIsInstalled()
         if isWebAuth {
+            // Web flow
             present(authViewController, animated:true, completion:nil)
         } else {
+            // Spotify iOS app flow
             UIApplication.shared.open(auth.spotifyAppAuthenticationURL())
         }
     }

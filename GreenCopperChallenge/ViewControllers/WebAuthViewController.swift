@@ -12,7 +12,9 @@ import Spotify
 
 class WebAuthViewController: UIViewController {
     
+    // used to Authenticate user to the Spotify API (if Spotify app is not installed)
     var webView: UIWebView = UIWebView(frame: UIScreen.main.bounds)
+    // Auth URL to show
     var initialURL: URL?
     var loadComplete: Bool = false
 

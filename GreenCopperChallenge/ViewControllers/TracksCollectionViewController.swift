@@ -34,6 +34,7 @@ class TracksCollectionViewController: UIViewController {
         return tracksCollectionView
     }()
     
+    // button to Logout of the App and kill Spotift session
     private lazy var logoutBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.plain, target: self, action: #selector(logoutButtonTapped))
 
@@ -83,11 +84,13 @@ class TracksCollectionViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
+    // function to Logout of the App and kill Spotift session - returns the user to the login screen
     @objc func logoutButtonTapped() {
         SPTAuth.defaultInstance().session = nil
         dismiss(animated: true, completion: nil)
     }
     
+    // Connect to the Spotify API and get Top Tracks data for what ever Band is passed for parameter
     func retrieveSpotifyData(for band: Band) {
         let auth:SPTAuth = SPTAuth.defaultInstance()
         let artistURL = band.spotifyURL
@@ -135,6 +138,7 @@ class TracksCollectionViewController: UIViewController {
     
 }
 
+// MARK: CollectionView extensions
 extension TracksCollectionViewController : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

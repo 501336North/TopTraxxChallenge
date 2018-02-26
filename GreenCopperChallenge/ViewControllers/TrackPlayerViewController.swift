@@ -14,13 +14,14 @@ import ColorThiefSwift
 
 class TrackPlayerViewController: UIViewController {
 
-    var trackToPlay: SPTTrack?
+    var trackToPlay: SPTTrack?                  //  selected track
     var isCurrentlyPlaying: Bool = false
     var isChangingProgress: Bool = false
-    var dominantColor: UIColor = UIColor.clear
-    var readableColor: UIColor = UIColor.clear
-    var artworkImage: UIImage?
+    var dominantColor: UIColor = UIColor.clear  // the dominant color from the album artwork
+    var readableColor: UIColor = UIColor.clear  // color to use on button, navbar, etc... depends on the dominant color
+    var artworkImage: UIImage?                  // artwork to the album on which the selected track can be found
     
+    // Spotify player
     private lazy var player: SPTAudioStreamingController = {
         return SPTAudioStreamingController.sharedInstance()
     }()
@@ -40,7 +41,7 @@ class TrackPlayerViewController: UIViewController {
         return label
     }()
     
-    
+    // simple progressbar to show track position while playing
     private lazy var progressSlider: TopTraxxSlider = {
         let slider = TopTraxxSlider()
         
@@ -53,6 +54,7 @@ class TrackPlayerViewController: UIViewController {
         return slider
     }()
     
+    // play / pause button
     private lazy var playerButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom)
         button.layer.cornerRadius = 30
@@ -73,6 +75,7 @@ class TrackPlayerViewController: UIViewController {
         return imageView
     }()
     
+    // UIImageView used on view background.  We are using album artwork to which some filters are applied.
     private lazy var blurredAlbumArtworkBackgroundImageView: UIImageView = {
         let overlayView = UIView()
         overlayView.backgroundColor = UIColor.topTraxxBlack.withAlphaComponent(0.25)
@@ -91,13 +94,14 @@ class TrackPlayerViewController: UIViewController {
         
         albumArtworkImageView.image = artworkImage
         
+        // computing filter on album artwork to use it on background view
         let blurRadius: CGFloat = 30.0
         let saturationDeltaFactor: CGFloat = 0.8
         let tintColor = UIColor.init(white: 0.75, alpha: 0.5)
         let blurredImage = UIImage.ty_imageByApplyingBlur(to: artworkImage!, withRadius: blurRadius, tintColor: tintColor, saturationDeltaFactor: saturationDeltaFactor, maskImage: nil)
         blurredAlbumArtworkBackgroundImageView.image = blurredImage
         
-        
+        // compute dominant color from artwork imagee
         if let color: MMCQ.Color = ColorThief.getColor(from: artworkImage!) {
             dominantColor = color.makeUIColor()
         }
@@ -114,6 +118,7 @@ class TrackPlayerViewController: UIViewController {
         player.diskCache = SPTDiskCache(capacity: 1024 * 1024 * 64)
         player.login(withAccessToken: auth.session.accessToken)
 
+        // configure navigation based on dominant color from album artwork
         guard let navController = navigationController else { return }
         navController.navigationBar.tintColor = dominantColor
         navController.navigationBar.barTintColor = dominantColor
@@ -147,7 +152,8 @@ class TrackPlayerViewController: UIViewController {
         player.logout()
         super.viewWillDisappear(animated)
     }
-        
+    
+    // Configure UI Elements and layout programmatically
     private func configureSubviews() {
         view.addSubview(blurredAlbumArtworkBackgroundImageView)
         view.addSubview(albumArtworkImageView)
@@ -201,6 +207,7 @@ class TrackPlayerViewController: UIViewController {
 
     }
 
+    // compute if we should light or dark color for text color depending on color passed as parameter (this param will be the dominant color we got from album artwork)
     func shouldUseLightForeColor(with color: UIColor) -> Bool {
         let threshold: CGFloat = 0.0000014
         let multiplier: CGFloat = 2.2
@@ -223,7 +230,7 @@ class TrackPlayerViewController: UIViewController {
         return false
     }
     
-    
+    // Update button title based on player state.
     func updatePlayerUI() {
         if (isCurrentlyPlaying) {
             playerButton.setTitle("Pause", for: .normal)
@@ -232,7 +239,7 @@ class TrackPlayerViewController: UIViewController {
         }
     }
     
-    
+    // Pause / Play the track
     @objc func playerButtonTouched() {
         player.setIsPlaying(!isCurrentlyPlaying, callback: nil)
         isCurrentlyPlaying = !isCurrentlyPlaying

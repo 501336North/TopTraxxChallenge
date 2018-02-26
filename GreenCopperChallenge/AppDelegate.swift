@@ -11,10 +11,10 @@ import Spotify
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    // The app delegate must implement the window property
+    // from UIApplicationDelegate protocol
     var window: UIWindow?
-    var session: SPTSession?
-    var player: SPTAudioStreamingController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // function to support URLSchemes.  Used if other apps wants to open our app.  In our case, when coming back from Auth.
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if SPTAuth.defaultInstance().canHandle(url) {
             
@@ -77,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    
+    // Setup default UINavigation Appearance.
     func configAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.topTraxxAccentDark
         UINavigationBar.appearance().barTintColor = UIColor.topTraxxDarkGray

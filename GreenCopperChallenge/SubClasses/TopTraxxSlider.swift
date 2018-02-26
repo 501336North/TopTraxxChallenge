@@ -15,6 +15,7 @@ class TopTraxxSlider: UISlider {
         didSet {setNeedsDisplay()}
     }
     
+    // overriding trackRect for bounds to have the track a tad taller.  Was a bit too thin for our needs.
     override open func trackRect(forBounds bounds: CGRect) -> CGRect {
         let defaultBounds = super.trackRect(forBounds: bounds)
         

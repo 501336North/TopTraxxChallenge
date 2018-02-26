@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 import Spotify
-import SnapKit
 
 class TracksCollectionViewCell: UICollectionViewCell {
     
@@ -39,6 +38,7 @@ class TracksCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    // on cell reuse, clear the label.  Image is managed by the caching.
     override func prepareForReuse() {
         trackTitleLabel.alpha = 0.0
         trackTitleLabel.text = ""
@@ -50,8 +50,10 @@ class TracksCollectionViewCell: UICollectionViewCell {
         let url = albumArtworkURL
         guard let placeHolderImage: UIImage = UIImage(named:"albumArtworkPlaceholder") else { return }
         
+        // asynchronously download the album artwork image.  AlamofireImage has built in cache to optimise that process.
         albumArtworkImageView.af_setImage(withURL: url, placeholderImage: placeHolderImage, completion: { (data) in
             
+             // Once we got the data back. Replace the place holder with the image we just downloaded.
              if (self.albumArtworkImageView.image?.size != placeHolderImage.size) {
                 self.trackTitleLabel.text = trackName
                 UIView.animate(withDuration: 0.35, animations: {
@@ -63,6 +65,7 @@ class TracksCollectionViewCell: UICollectionViewCell {
         
     }
     
+    // Configure UI Elements and layout programmatically
     private func configureSubviews() {
         backgroundColor = UIColor.topTraxxDarkGray
         

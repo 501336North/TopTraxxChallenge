@@ -10,6 +10,7 @@ import Foundation
 import Fabric
 import Crashlytics
 
+// User Default First Launch key
 let kFirstLaunchKeyKey = "kFirstLaunchKeyKey"
 
 /// Service protocol definition

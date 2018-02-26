@@ -9,10 +9,14 @@
 import Foundation
 import Spotify
 
+// Spotify SDK client ID
 let kClientId = "9643fe3d8c1042fe93658bb65de80e7d"
+// URLScheme for callback
 let kCallbackURL = "greencopper://returnafterlogin"
 
+// Notification name for Spotify session update
 let kSessionWasUpdated = "kSessionWasUpdatedNotification"
+// User Default session key
 let kSessionObjectDefaultsKey = "kSessionObjectDefaultsKey"
 
 /// Service protocol definition
