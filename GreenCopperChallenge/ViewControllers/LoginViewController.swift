@@ -218,6 +218,7 @@ class LoginViewController: UIViewController {
             UIApplication.shared.open(auth.spotifyAppAuthenticationURL())
         }
     }
+    
 
     
 

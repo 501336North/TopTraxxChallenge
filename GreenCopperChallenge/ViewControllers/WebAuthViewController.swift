@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SafariServices
 import Spotify
 
 class WebAuthViewController: UIViewController {
@@ -36,14 +37,23 @@ class WebAuthViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let initialURL = initialURL {
+            let initialRequest: URLRequest = URLRequest(url: initialURL)
+            webView.loadRequest(initialRequest)
+        }
+    }
+    
     convenience init(with initialURL: URL) {
         self.init(nibName: nil, bundle: nil)
-        let initialRequest: URLRequest = URLRequest(url: initialURL)
+        self.initialURL = initialURL
         
         view.addSubview(webView)
         navigationItem.setLeftBarButton(cancelBarButtonItem, animated: false)
         
-        webView.loadRequest(initialRequest)
+        clearCookies()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -55,4 +65,16 @@ class WebAuthViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func clearCookies() {
+        let storage: HTTPCookieStorage = HTTPCookieStorage.shared
+        if let cookies: Array<HTTPCookie> = storage.cookies {
+            for cookie in cookies {
+                if cookie.domain.range(of: "spotify.") != nil || cookie.domain.range(of: "facebook.") != nil {
+                    storage.deleteCookie(cookie)
+                }
+
+            }
+        }
+    }
+
 }
