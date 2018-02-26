@@ -6,6 +6,8 @@
 //  Copyright © 2018 Radappz. All rights reserved.
 //
 
+import Foundation
+import SystemConfiguration
 import UIKit
 import Spotify
 import SnapKit
@@ -277,6 +279,17 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @objc func showNoInternetAlert() {
+        let alertController = UIAlertController(title: "No Internet Connection", message: "This application needs internet access.\nCheck your connection and try again.", preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        }
+        alertController.addAction(action1)
+        alertController.view.tintColor = UIColor.topTraxxAccentDark
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     // Show short lived account info so users can log in and test the app.
     @objc func hintButtonTouched() {
         let alertController = UIAlertController(title: "We've got you covered", message: "Try\n501336north\n&\n713809\n\nP.S. Just remember the password.  We've copied the username to the pasteboard for you.", preferredStyle: .alert)
@@ -292,6 +305,12 @@ class LoginViewController: UIViewController {
     
     // Auth to a Spotify Premium account
     @objc func loginButtonTouched() {
+        
+        if ( isInternetAvailable() == false ) {
+            showNoInternetAlert()
+            return
+        }
+        
         guard let session = auth.session else { openLoginPage(); return }
         
         if (session.isValid()) {
@@ -324,6 +343,26 @@ class LoginViewController: UIViewController {
     }
     
 
+    func isInternetAvailable() -> Bool
+    {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
     
 
 }
