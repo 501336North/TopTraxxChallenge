@@ -42,7 +42,7 @@ class TopTraxxUITests: XCTestCase {
         let exists = NSPredicate(format: "exists == true")
         let promise = self.expectation(for: exists, evaluatedWith: requireLabel, handler: nil)
         
-        self.wait(for: [promise], timeout: 2)
+        wait(for: [promise], timeout: 2)
     }
     
     
