@@ -1,6 +1,0 @@
-framework module Pods_GreenCopperChallenge {
-  umbrella header "Pods-GreenCopperChallenge-umbrella.h"
-
-  export *
-  module * { export * }
-}
