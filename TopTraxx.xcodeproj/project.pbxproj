@@ -24,6 +24,7 @@
 		2895E76320450E4D00FABA66 /* Pods_TopTraxx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2895E76420450E4D00FABA66 /* Pods_TopTraxx.framework */; };
 		2895E766204540C600FABA66 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895E765204540C600FABA66 /* TestAppDelegate.swift */; };
 		2895E7682045416F00FABA66 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895E7672045416F00FABA66 /* main.swift */; };
+		2895E76E2045CD6100FABA66 /* spotifyTopTracks.json in Resources */ = {isa = PBXBuildFile; fileRef = 2895E76D2045CD6100FABA66 /* spotifyTopTracks.json */; };
 		28AF23942041F5E6001A88A5 /* Bootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF23932041F5E6001A88A5 /* Bootstrapper.swift */; };
 		28AF23972041F65D001A88A5 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF23962041F65D001A88A5 /* ServiceFactory.swift */; };
 		28AF239B2041F72C001A88A5 /* AppStartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF239A2041F72C001A88A5 /* AppStartupService.swift */; };
@@ -73,6 +74,7 @@
 		2895E76420450E4D00FABA66 /* Pods_TopTraxx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TopTraxx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2895E765204540C600FABA66 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		2895E7672045416F00FABA66 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2895E76D2045CD6100FABA66 /* spotifyTopTracks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = spotifyTopTracks.json; sourceTree = "<group>"; };
 		28AF23932041F5E6001A88A5 /* Bootstrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrapper.swift; sourceTree = "<group>"; };
 		28AF23962041F65D001A88A5 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		28AF239A2041F72C001A88A5 /* AppStartupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupService.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				28610B7E203F9B9E00554142 /* SubClasses */,
 				28610B7A203F8F5E00554142 /* ViewControllers */,
 				2824C476203B852E000B343E /* Assets.xcassets */,
+				2895E76D2045CD6100FABA66 /* spotifyTopTracks.json */,
 				2824C47B203B852E000B343E /* Info.plist */,
 				286D774A20450A210018ADC3 /* TopTraxx.entitlements */,
 				2895E7672045416F00FABA66 /* main.swift */,
@@ -364,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2895E76E2045CD6100FABA66 /* spotifyTopTracks.json in Resources */,
 				2824C477203B852E000B343E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

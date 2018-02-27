@@ -21,11 +21,12 @@ protocol SpotifyNetworkingProtocol {
 }
 
 final class NetworkService : SpotifyNetworkingProtocol {
-    var useMockDataForUnitTesting: Bool = false
-    
+
     /// Connect to the Spotify API and get Top Tracks data for what ever Band is passed for parameter
     func retrieveTopTracks(for band: Band, closure: (() -> Void)?) {
-        if useMockDataForUnitTesting {
+        guard let application: TestAppDelegateProtocol = UIApplication.shared.delegate as? TestAppDelegateProtocol else { return }
+        
+        if application.useMockForUnitTesting == false {
             let auth:SPTAuth = SPTAuth.defaultInstance()
             let artistURL = band.spotifyURL
             
@@ -63,11 +64,18 @@ final class NetworkService : SpotifyNetworkingProtocol {
             } catch _ {
             }
         } else {
+            if let path = Bundle.main.path(forResource: "spotifyTopTracks", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    let testTracksJSON = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String:Any]
+                    if let topTracks: Array<Any> = testTracksJSON!["tracks"] as? Array<Any> {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kSpotifyTopTracksReceived), object: topTracks)
+                    }
+                } catch {
+                    // handle error
+                }
+            }
             
-            // get .json file from bundle
-            let mockedTopTracks: Array<Any> = []
-            
-             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kSpotifyTopTracksReceived), object: mockedTopTracks)
         }
         closure?()
     }

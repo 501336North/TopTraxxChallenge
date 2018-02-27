@@ -45,7 +45,7 @@ final class AuthService : SpotifyAuthProtocol {
     func authenticate(closure: ((Bool) -> Void)?) {
         guard let application: TestAppDelegateProtocol = UIApplication.shared.delegate as? TestAppDelegateProtocol else { return }
        
-        if application.useMockAuthForUnitTesting == true {
+        if application.useMockForUnitTesting == true {
             closure?(true)
         } else {
             if let session = SPTAuth.defaultInstance().session {

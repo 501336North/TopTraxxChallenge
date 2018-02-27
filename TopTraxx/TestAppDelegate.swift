@@ -11,14 +11,14 @@ import UIKit
 import Spotify
 
 protocol TestAppDelegateProtocol {
-    var useMockAuthForUnitTesting: Bool { get set }
+    var useMockForUnitTesting: Bool { get set }
 }
 
 class TestAppDelegate: UIResponder, UIApplicationDelegate, TestAppDelegateProtocol {
     
     var window: UIWindow?
     var isUserInAuthFlow: Bool = false
-    var useMockAuthForUnitTesting: Bool = true
+    var useMockForUnitTesting: Bool = true
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

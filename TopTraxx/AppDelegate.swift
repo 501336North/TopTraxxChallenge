@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TestAppDelegateProtocol {
     
     var window: UIWindow?
     var isUserInAuthFlow: Bool = false
-    var useMockAuthForUnitTesting: Bool = false
+    var useMockForUnitTesting: Bool = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
