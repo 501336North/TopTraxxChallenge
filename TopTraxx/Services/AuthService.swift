@@ -12,7 +12,7 @@ import Spotify
 /// Spotify SDK client ID
 let kClientId = "80acd1fa352c42b2b7258bf607144dad"
 /// URLScheme for callback
-let kCallbackURL = "topTraxx://returnafterlogin"
+let kCallbackURL = "toptraxx://returnafterlogin"
 
 /// Notification name for Spotify session update
 let kSessionWasUpdated = "kSessionWasUpdatedNotification"

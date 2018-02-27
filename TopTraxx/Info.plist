@@ -27,7 +27,7 @@
 			<string>com.radappz.TopTraxx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>topTraxx</string>
+				<string>toptraxx</string>
 			</array>
 		</dict>
 	</array>
