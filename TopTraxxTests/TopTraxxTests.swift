@@ -18,7 +18,6 @@ class TopTraxxTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         loginUnderTest = LoginViewController()
-        
     }
     
     override func tearDown() {
@@ -51,7 +50,7 @@ class TopTraxxTests: XCTestCase {
         XCTAssertNotNil(kCallbackURL, "Spotify Callback URL is mandatory")
         XCTAssert(kCallbackURL.contains("://") == true, "Properly formatted Spotify Callback URL is mandatory")
     }
-    
+        
     // XCTAssert to test model
     func testDoesBandHasSpotifyURL() {
         loginUnderTest?.fillBandsMockData()

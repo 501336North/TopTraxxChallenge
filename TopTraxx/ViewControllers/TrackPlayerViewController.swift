@@ -21,7 +21,7 @@ class TrackPlayerViewController: UIViewController {
     /// the dominant color from the album artwork
     var dominantColor: UIColor = UIColor.clear
     /// color to use on button, navbar, etc... depends on the
-    var readableColor: UIColor = UIColor.clear   dominant color
+    var readableColor: UIColor = UIColor.clear 
     /// artwork to the album on which the selected track can be found
     var artworkImage: UIImage?
     

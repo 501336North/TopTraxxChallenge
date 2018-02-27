@@ -6,6 +6,7 @@
 //  Copyright © 2018 Radappz. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import Fabric
 import Crashlytics
@@ -30,6 +31,10 @@ final class AppStartupService : AppStartupServiceProtocol {
     }
     
     func start(_ closure: (() -> Void)?) {
+        if ProcessInfo.processInfo.environment["DISABLE_ANIMATIONS"] == "1" {
+            UIView.setAnimationsEnabled(false)
+        }
+        
         UserDefaults.standard.set(kFirstLaunchKeyKey, forKey: kFirstLaunchKeyKey)
         Fabric.with([Crashlytics.self])
         

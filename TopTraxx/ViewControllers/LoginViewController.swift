@@ -311,15 +311,19 @@ class LoginViewController: UIViewController {
             showNoInternetAlert()
             return
         }
-        
-        guard let session = auth.session else { openLoginPage(); return }
-        
-        if (session.isValid()) {
-            // It's still valid, show the player.
-            showTrackList()
-        } else {
-            openLoginPage()
+  
+        if let authService = ServiceFactory.resolve(serviceType: SpotifyAuthProtocol.self) {
+            authService.authenticate(closure: {  authIsValid in
+                if authIsValid {
+                    // It's still valid, show the player.
+                    self.showTrackList()
+                } else {
+                    self.openLoginPage()
+                }
+            })
         }
+        
+       
     }
     
     /// Present Top Tracks for our Band in a CollectionView

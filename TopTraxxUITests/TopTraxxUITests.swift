@@ -7,6 +7,9 @@
 ///
 
 import XCTest
+@testable import TopTraxx
+
+let kUseMockAuthForUnitTesting = "com.radappz.TopTraxx.UseMockAuth"
 
 class TopTraxxUITests: XCTestCase {
     var app: XCUIApplication!
@@ -29,16 +32,30 @@ class TopTraxxUITests: XCTestCase {
     
     /// MARK: - Tests
     
-    func testLoginButtonTouched() {
+    func testLogoutButtonTouched() {
+        app.launchArguments = [ kUseMockAuthForUnitTesting, "YES" ]
+        app.launch()
+        app.buttons["Login"].tap()
+        app.buttons["Logout"].tap()
+        
+        let requireLabel = self.app.staticTexts["We require Spotify Premium."]
+        let exists = NSPredicate(format: "exists == true")
+        let promise = self.expectation(for: exists, evaluatedWith: requireLabel, handler: nil)
+        
+        self.wait(for: [promise], timeout: 2)
+    }
+    
+    
+    func testLogin() {
+        let logoutBtn = self.app.buttons["Logout"]
+        let exists = NSPredicate(format: "exists == true")
+        let promise = self.expectation(for: exists, evaluatedWith: logoutBtn, handler: nil)
+
+        app.launchArguments = [ kUseMockAuthForUnitTesting, "YES" ]
         app.launch()
         app.buttons["Login"].tap()
         
+        wait(for: [promise], timeout: 2)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            // Login ViewController should no longer be displaying, login should either bring the webView to login or pop the Spotify app to authorize
-            XCTAssert(self.app.state != XCUIApplication.State.runningForeground , "UI TEST FAILED! testLoginButtonTouched")
-
-        })
     }
-    
 }

@@ -25,6 +25,7 @@ protocol SpotifyAuthProtocol {
     ///
     /// - Parameter closure: Callback called when service logic has completed
     func configure(_ closure: (() -> Void)?)
+    func authenticate(closure: ((Bool) -> Void)?)
     
 }
 
@@ -39,6 +40,20 @@ final class AuthService : SpotifyAuthProtocol {
         auth.sessionUserDefaultsKey = kSessionObjectDefaultsKey
 
         closure?()
+    }
+    
+    func authenticate(closure: ((Bool) -> Void)?) {
+        guard let application: TestAppDelegateProtocol = UIApplication.shared.delegate as? TestAppDelegateProtocol else { return }
+       
+        if application.useMockAuthForUnitTesting == true {
+            closure?(true)
+        } else {
+            if let session = SPTAuth.defaultInstance().session {
+                closure?(session.isValid())
+            } else {
+                closure?(false)
+            }
+        }
     }
 }
 
