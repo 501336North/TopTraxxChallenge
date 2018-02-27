@@ -16,7 +16,7 @@ the login screen.
 
 # Auth
 
-Please not that if you have the Spotify app installed on your phone, the Authentication
+Please note that if you have the Spotify app installed on your phone, the Authentication
 flow will use the app to log you in.  If you don't have the app, we get you authenticated
 using the web flow.
 
@@ -25,12 +25,12 @@ using the web flow.
 We made use of a few external libs (using cocoapods) to speed up dev process. Here they are
 along with a quick description.
 
-AlamofireImage : Networking lib that deals with web image retrieval.  
-ColorThiefSwift : Get dominant color of an image.
-Crashlytics : Defacto lib to collect crashes, issues, bugs, etc.
-Fabric : Crashlytics home
-SnapKit : Lib to do the layout by code.
-Spotify-iOS-SDK : Wrapper to Spotify's API
-SwiftLint : Lib to enforce coding rules.
-TYBlurImage : Lib to blur images on the fly.
-Swinject : Dependency Injection Framework.
+* AlamofireImage : Networking lib that deals with web image retrieval.
+* ColorThiefSwift : Get dominant color of an image.
+* Crashlytics : Defacto lib to collect crashes, issues, bugs, etc.
+* Fabric : Crashlytics home
+* SnapKit : Lib to do the layout by code.
+* Spotify-iOS-SDK : Wrapper to Spotify's API
+* SwiftLint : Lib to enforce coding rules.
+* TYBlurImage : Lib to blur images on the fly.
+* Swinject : Dependency Injection Framework.
